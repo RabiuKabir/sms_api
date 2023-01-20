@@ -13,6 +13,7 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// 'throttle:60,1' to add rate limiter
 
 Route::group([
     'middleware' => 'api',
