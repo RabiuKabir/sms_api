@@ -91,7 +91,7 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
     /**
-     * Get the token array structure
+     * Get the token array structure.
      *
      * @param  string $token
      *
