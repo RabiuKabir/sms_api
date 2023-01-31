@@ -82,7 +82,7 @@ class AuthController extends Controller
         return $this->createNewToken(Auth::refresh());
     }
     /**
-     * Get the authenticated User
+     * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
      */
