@@ -49,6 +49,11 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            'role' => 'required | string',
+            'address' => 'string | required',
+            'phone' => 'string|required',
+            'gender' => 'string|required',
+            'dob' => 'required|string'
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
