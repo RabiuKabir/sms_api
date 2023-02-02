@@ -34,16 +34,18 @@ class AttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function newAttendance(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'text' => 'required'
+            'userId' => 'required',
+            'date' => 'required',
+            'status' => 'required'
         ]);
 
         $newAttendance = new Attendance([
-            'name' => $request->get('name'),
-            'text' => $request->get('text')
+            'userId' => $request->get('UserId'),
+            'date' => $request->get('date'),
+            'status' => $request->get('status')
         ]);
 
         $newAttendance->save();
