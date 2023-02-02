@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -61,8 +62,9 @@ class AttendanceController extends Controller
      */
     public function userAttendance($id)
     {
-        $attendance = Attendance::findOrFail($id);
-        return response()->json($attendance);
+        $user = User::findOrFail($id);
+        $userAttendance = $user->attendances()->get();
+        return response()->json($userAttendance);
     }
 
     /**
@@ -85,7 +87,21 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+
+        $request->validate([
+            'userId' => 'required',
+            'date' => 'required',
+            'status' => 'required'
+        ]);
+
+        $attendance->userId = $request->get('userId');
+        $attendance->date = $request->get('date');
+        $attendance->status = $request->get('status');
+
+        $attendance->save();
+
+        return response()->json($attendance);
     }
 
     /**
