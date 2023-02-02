@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Foundation\Auth\User as AuthUser;
+//use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -60,7 +60,7 @@ class AuthController extends Controller
         }
 
         // changing the User to AuthUser causes the error message to disappear
-        $user = AuthUser::create(array_merge(
+        $user = User::create(array_merge(
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
