@@ -11,8 +11,16 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * 
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
     public function allAttendance()
     {
         $attendance = Attendance::all();
@@ -44,7 +52,7 @@ class AttendanceController extends Controller
         ]);
 
         $newAttendance = new Attendance([
-            'userId' => $request->get('UserId'),
+            'userId' => $request->get('userId'),
             'date' => $request->get('date'),
             'status' => $request->get('status')
         ]);

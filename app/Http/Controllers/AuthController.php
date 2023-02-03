@@ -59,7 +59,6 @@ class AuthController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        // changing the User to AuthUser causes the error message to disappear
         $user = User::create(array_merge(
             $validator->validated(),
             ['password' => bcrypt($request->password)]

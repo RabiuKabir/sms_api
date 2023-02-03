@@ -13,4 +13,10 @@ class Attendance extends Model
         'date',
         'status',
     ];
+
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
