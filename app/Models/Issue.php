@@ -11,6 +11,7 @@ class Issue extends Model
 
 
     protected $fillable = [
+        'user_id',
         'type',
         'details',
         'is_resolved',
