@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Auth;
 
-class CreateAttendancesTable extends Migration
+class CreateIssuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,11 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->date('date');
-            $table->boolean('status');
+            $table->varchar('type');
+            $table->varchar('details');
+            $table->boolean('is_resolved');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('issues');
     }
 }
