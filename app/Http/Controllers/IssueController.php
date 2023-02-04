@@ -26,6 +26,13 @@ class IssueController extends Controller
         return response()->json($issues);
     }
 
+
+    public function allResolvedIssues()
+    {
+        $issues = Issue::select("*")->where("is_resolved", 1)->get();
+        return response()->json($issues);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -48,14 +55,12 @@ class IssueController extends Controller
             'user_id' => 'required',
             'type' => 'required',
             'details' => 'required',
-            'is_resolved' => 'required'
         ]);
 
         $newIssues = new Issue([
             'user_id' => $request->get('user_id'),
             'type' => $request->get('type'),
             'details' => $request->get('details'),
-            'is_resolved' => $request->get('is_resolved')
         ]);
 
         $newIssues->save();
@@ -87,9 +92,15 @@ class IssueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function resolveIssue(Request $request, $id)
     {
-        //
+        $issue = Issue::findOrFail($id);
+        $request->validate([
+            'is_resolved' => 'required'
+        ]);
+        $issue->is_resolved = $request->get('is_resolved');
+        $issue->update();
+        return response()->json($issue);
     }
 
     /**
@@ -101,7 +112,21 @@ class IssueController extends Controller
      */
     public function editIssue(Request $request, $id)
     {
-        
+        $issue = Issue::findOrFail($id);
+
+        $request->validate([
+            'user_id' => 'required',
+            'type' => 'required',
+            'details' => 'required',
+        ]);
+
+        $issue->user_id = $request->get('user_id');
+        $issue->type = $request->get('type');
+        $issue->details = $request->get('details');
+
+        $issue->update();
+
+        return response()->json($issue);
     }
 
     /**
@@ -110,8 +135,11 @@ class IssueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteIssue($id)
     {
-        //
+        $issue = Issue::findOrFail($id);
+        $issue->delete();
+
+        return response()->json($issue::all());
     }
 }
