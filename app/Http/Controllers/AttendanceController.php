@@ -34,7 +34,6 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -46,19 +45,18 @@ class AttendanceController extends Controller
     public function newAttendance(Request $request)
     {
         $request->validate([
-            'userId' => 'required',
+            'user_id' => 'required',
             'date' => 'required',
             'status' => 'required'
         ]);
 
         $newAttendance = new Attendance([
-            'userId' => $request->get('userId'),
+            'user_id' => $request->get('user_id'),
             'date' => $request->get('date'),
             'status' => $request->get('status')
         ]);
 
         $newAttendance->save();
-
         return response()->json($newAttendance);
     }
 
@@ -98,12 +96,12 @@ class AttendanceController extends Controller
         $attendance = Attendance::findOrFail($id);
 
         $request->validate([
-            'userId' => 'required',
+            'user_id' => 'required',
             'date' => 'required',
             'status' => 'required'
         ]);
 
-        $attendance->userId = $request->get('userId');
+        $attendance->user_id = $request->get('user_id');
         $attendance->date = $request->get('date');
         $attendance->status = $request->get('status');
 
