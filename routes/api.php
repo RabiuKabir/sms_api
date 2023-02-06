@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\IssueController;
 /*
 |--------------------------------------------------------------------------
 | API Route.
@@ -29,4 +30,13 @@ Route::group([
     Route::post('/new-attendance', [AttendanceController::class, 'newAttendance']);
     Route::get('/attendance', [AttendanceController::class, 'allAttendance']);
     Route::get('/attendance/{id}', [AttendanceController::class, 'userAttendance']);
+
+    Route::get('/issues', [IssueController::class, 'allIssues']);
+    Route::get('/resolved-issues', [IssueController::class, 'allResolvedIssues']);
+    Route::post('/new-issue', [IssueController::class, 'newIssue']);
+    Route::get('/issue-details{id}', [IssueController::class, 'issueDetails']);
+    Route::get('/student-issues/{id}', [IssueController::class, 'studentIssues']);
+    Route::patch('/resolve-issue{id}', [IssueController::class, 'resolveIssue']);
+    Route::put('/edit-issue{id}', [IssueController::class, 'editIssue']);
+    Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 });
