@@ -15,9 +15,10 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->varchar('type');
-            $table->varchar('details');
-            $table->boolean('is_resolved');
+            $table->integer('user_id');
+            $table->string('type');
+            $table->string('details');
+            $table->boolean('is_resolved')->nullable();
             $table->timestamps();
         });
     }
