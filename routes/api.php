@@ -34,9 +34,9 @@ Route::group([
     Route::get('/issues', [IssueController::class, 'allIssues']);
     Route::get('/resolved-issues', [IssueController::class, 'allResolvedIssues']);
     Route::post('/new-issue', [IssueController::class, 'newIssue']);
-    Route::get('/issue-details{id}', [IssueController::class, 'issueDetails']);
+    Route::get('/issue-details/{id}', [IssueController::class, 'issueDetails']);
     Route::get('/student-issues/{id}', [IssueController::class, 'studentIssues']);
-    Route::patch('/resolve-issue{id}', [IssueController::class, 'resolveIssue']);
-    Route::put('/edit-issue{id}', [IssueController::class, 'editIssue']);
+    Route::patch('/resolve-issue/{id}', [IssueController::class, 'resolveIssue']);
+    Route::put('/edit-issue/{id}', [IssueController::class, 'editIssue']);
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 });
