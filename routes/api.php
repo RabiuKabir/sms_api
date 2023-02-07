@@ -39,4 +39,9 @@ Route::group([
     Route::patch('/resolve-issue/{id}', [IssueController::class, 'resolveIssue']);
     Route::put('/edit-issue/{id}', [IssueController::class, 'editIssue']);
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
+
+    Route::post('/new-subject', [SubjectController::class, 'newSubject']);
+    Route::get('/subjects', [SubjectController::class, 'allSubjects']);
+    Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
+    Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
 });
