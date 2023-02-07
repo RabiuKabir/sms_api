@@ -137,11 +137,11 @@ class IssueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteIssue($id)
+    public function deleteSubject($id)
     {
-        $issue = Issue::findOrFail($id);
-        $issue->delete();
+        $subject = Issue::findOrFail($id);
+        $subject->delete();
 
-        return response()->json($issue::all());
+        return response()->json($subject::all());
     }
 }

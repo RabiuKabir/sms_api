@@ -11,10 +11,17 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    
     public function subjects()
     {
         $subject = Subject::findAll();
-        return response()->json($subject, 200);
+        return response()->json($subject);
     }
 
     /**
@@ -101,7 +108,7 @@ class SubjectController extends Controller
 
         $subject->save();
 
-        return response()->json($subject, 204);
+        return response()->json($subject);
     }
 
     /**
@@ -115,6 +122,6 @@ class SubjectController extends Controller
         $subject = Subject::findOrFail($id);
         $subject->delete();
 
-        return response()->json($subject::all(), 204);
+        return response()->json($subject::all());
     }
 }
