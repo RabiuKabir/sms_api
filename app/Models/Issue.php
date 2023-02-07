@@ -14,7 +14,7 @@ class Issue extends Model
         'user_id',
         'type',
         'details',
-        'is_resolved',
+        'is_resolved'
     ];
 
 

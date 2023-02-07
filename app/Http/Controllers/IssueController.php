@@ -56,11 +56,11 @@ class IssueController extends Controller
             'type' => 'required',
             'details' => 'required',
         ]);
-
+     
         $newIssues = new Issue([
             'user_id' => $request->get('user_id'),
             'type' => $request->get('type'),
-            'details' => $request->get('details'),
+            'details' => $request->get('details')
         ]);
 
         $newIssues->save();
@@ -95,11 +95,13 @@ class IssueController extends Controller
     public function resolveIssue(Request $request, $id)
     {
         $issue = Issue::findOrFail($id);
-        $request->validate([
+             $request->validate([
             'is_resolved' => 'required'
         ]);
-        $issue->is_resolved = $request->get('is_resolved');
-        $issue->update();
+        // $issue->is_resolved = $request->get('is_resolved');
+        // $issue->update();
+        
+        $issue->update(['is_resolved' => $request->get('is_resolved')]);
         return response()->json($issue);
     }
 
