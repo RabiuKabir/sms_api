@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
-use App\Models\User;
 use Illuminate\Http\Request;
-
-class AttendanceController extends Controller
+use App\Models\Subject;
+class SubjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * 
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
+    public function subjects()
     {
-        $this->middleware('auth:api');
-    }
-
-
-    public function allAttendance()
-    {
-        $attendance = Attendance::findAll();
-        return response()->json($attendance);
+        $subject = Subject::findAll();
+        return response()->json($subject, 200);
     }
 
     /**
@@ -34,6 +24,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
+        
     }
 
     /**
@@ -42,22 +33,24 @@ class AttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function newAttendance(Request $request)
+    public function newSubject(Request $request)
     {
         $request->validate([
-            'user_id' => 'required',
-            'date' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'grade' => 'required',
             'status' => 'required'
         ]);
 
-        $newAttendance = new Attendance([
-            'user_id' => $request->get('user_id'),
-            'date' => $request->get('date'),
+        $newSubject = new Subject([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'grade' => $request->get('grade'),
             'status' => $request->get('status')
         ]);
 
-        $newAttendance->save();
-        return response()->json($newAttendance);
+        $newSubject->save();
+        return response()->json($newSubject);
     }
 
     /**
@@ -66,11 +59,9 @@ class AttendanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function userAttendance($id)
+    public function show($id)
     {
-        $user = User::findOrFail($id);
-        $userAttendance = $user->attendances()->get();
-        return response()->json($userAttendance);
+        //
     }
 
     /**
@@ -91,23 +82,26 @@ class AttendanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editSubject(Request $request, $id)
     {
-        $attendance = Attendance::findOrFail($id);
+
+        $subject = Subject::findOrFail($id);
 
         $request->validate([
-            'user_id' => 'required',
-            'date' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'grade' => 'required',
             'status' => 'required'
         ]);
 
-        $attendance->user_id = $request->get('user_id');
-        $attendance->date = $request->get('date');
-        $attendance->status = $request->get('status');
+        $subject->name = $request->get('name');
+        $subject->description = $request->get('description');
+        $subject->grade = $request->get('grade');
+        $subject->status = $request->get('status');
 
-        $attendance->save();
+        $subject->save();
 
-        return response()->json($attendance);
+        return response()->json($subject, 204);
     }
 
     /**
@@ -116,8 +110,11 @@ class AttendanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteSubject($id)
     {
-        //
+        $subject = Subject::findOrFail($id);
+        $subject->delete();
+
+        return response()->json($subject::all(), 204);
     }
 }
