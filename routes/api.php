@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\IssueController;
+use App\Http\Controllers\SubjectController;
 /*
 |--------------------------------------------------------------------------
 | API Route.
@@ -41,7 +42,7 @@ Route::group([
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 
     Route::post('/new-subject', [SubjectController::class, 'newSubject']);
-    Route::get('/subjects', [SubjectController::class, 'allSubjects']);
+    Route::get('/subjects', [SubjectController::class, 'subjects']);
     Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
     Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
 });
