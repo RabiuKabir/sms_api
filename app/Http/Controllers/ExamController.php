@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Subject;
-class SubjectController extends Controller
+use App\Models\Exam;
+
+class ExamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +18,11 @@ class SubjectController extends Controller
         $this->middleware('auth:api');
     }
 
-    
-    public function subjects()
+
+    public function exams()
     {
-        $subject = Subject::select('*')->orderBy('id', 'ASC')->get();
-        return response()->json($subject);
+        $exam = Exam::select('*')->orderBy('id', 'ASC')->get();
+        return response()->json($exam);
     }
 
     /**
@@ -31,7 +32,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -40,24 +41,22 @@ class SubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function newSubject(Request $request)
+    public function newExam(Request $request)
     {
         $request->validate([
+            'date' => 'required',
             'name' => 'required',
-            'description' => 'required',
-            'grade' => 'required',
-            'status' => 'required'
+            'type' => 'required',
         ]);
 
-        $newSubject = new Subject([
+        $newExams = new Exam([
+            'date' => $request->get('date'),
             'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'grade' => $request->get('grade'),
-            'status' => $request->get('status')
+            'type' => $request->get('type'),
         ]);
 
-        $newSubject->save();
-        return response()->json($newSubject);
+        $newExams->save();
+        return response()->json($newExams);
     }
 
     /**
@@ -79,7 +78,6 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -89,26 +87,23 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editSubject(Request $request, $id)
+    public function editExam(Request $request, $id)
     {
-
-        $subject = Subject::findOrFail($id);
+        $exam = Exam::findOrFail($id);
 
         $request->validate([
+            'date' => 'required',
             'name' => 'required',
-            'description' => 'required',
-            'grade' => 'required',
-            'status' => 'required'
+            'type' => 'required',
         ]);
 
-        $subject->name = $request->get('name');
-        $subject->description = $request->get('description');
-        $subject->grade = $request->get('grade');
-        $subject->status = $request->get('status');
+        $exam->date = $request->get('date');
+        $exam->name = $request->get('name');
+        $exam->type = $request->get('type');
 
-        $subject->save();
+        $exam->save();
 
-        return response()->json($subject);
+        return response()->json($exam);
     }
 
     /**
@@ -117,11 +112,11 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteSubject($id)
+    public function deleteExam($id)
     {
-        $subject = Subject::findOrFail($id);
-        $subject->delete();
+        $exam = Exam::findOrFail($id);
+        $exam->delete();
 
-        return response()->json($subject::all());
+        return response()->json($exam::all());
     }
 }
