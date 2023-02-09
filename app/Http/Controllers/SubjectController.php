@@ -20,7 +20,7 @@ class SubjectController extends Controller
     
     public function subjects()
     {
-        $subject = Subject::findAll();
+        $subject = Subject::select('*')->orderBy('id', 'ASC')->get();;
         return response()->json($subject);
     }
 
