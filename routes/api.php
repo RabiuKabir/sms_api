@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ExamController;
 /*
 |--------------------------------------------------------------------------
 | API Route.
@@ -45,4 +46,9 @@ Route::group([
     Route::get('/subjects', [SubjectController::class, 'subjects']);
     Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
     Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
+
+    Route::post('/new-exam', [ExamController::class, 'newExam']);
+    Route::get('/exams', [ExamController::class, 'exams']);
+    Route::patch('/edit-exam/{id}', [ExamController::class, 'editExam']);
+    Route::delete('/delete-exam/{id}', [ExamController::class, 'deleteExam']);
 });
