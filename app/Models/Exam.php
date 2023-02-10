@@ -15,5 +15,11 @@ class Exam extends Model
         'type'
    ];
 
+
+
+     public function results()
+     {
+          return $this->hasMany(Result::class);
+     }
     
 }

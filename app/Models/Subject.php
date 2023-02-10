@@ -17,4 +17,11 @@ class Subject extends Model
         'status'
     ];
 
+
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
 }
