@@ -12,7 +12,7 @@ class ResultController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function results()
     {
         $result = Result::all();
         return response()->json($result);
