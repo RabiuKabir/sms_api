@@ -13,6 +13,12 @@ class ResultController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     public function results()
     {
         $result = Result::all();
@@ -44,15 +50,16 @@ class ResultController extends Controller
             'marks' => 'required'
         ]);
 
-        $newResult = new Result([
+        echo  $newResult = new Result([
             'exam_id' => $request->get('exam_id'),
             'user_id' => $request->get('user_id'),
             'subject_id' => $request->get('subject_id'),
-            'marks' => $request->get('marks')
+            'marks' => $request->get('marks'),
+            'created_by' => "65"
         ]);
 
-        $newResult->save();
-        return response()->json($newResult);
+        //   $newResult->save();
+        //   return response()->json($newResult);
     }
 
     /**
