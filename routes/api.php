@@ -51,4 +51,9 @@ Route::group([
     Route::get('/exams', [ExamController::class, 'exams']);
     Route::patch('/edit-exam/{id}', [ExamController::class, 'editExam']);
     Route::delete('/delete-exam/{id}', [ExamController::class, 'deleteExam']);
+
+    Route::post('/new-result', [ResultController::class, 'newResult']);
+    Route::get('/results', [ResultController::class, 'results']);
+    Route::patch('/edit-result/{id}', [ResultController::class, 'editResult']);
+    Route::delete('/delete-result/{id}', [ResultController::class, 'deleteResult']);
 });
