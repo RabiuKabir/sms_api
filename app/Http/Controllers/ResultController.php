@@ -55,7 +55,7 @@ class ResultController extends Controller
             'user_id' => $request->get('user_id'),
             'subject_id' => $request->get('subject_id'),
             'marks' => $request->get('marks'),
-         //   'created_by' => "65"
+            'created_by' => "65"
         ]);
 
         //   $newResult->save();
