@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Result;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResultController extends Controller
 {
@@ -34,9 +35,24 @@ class ResultController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function newResult(Request $request)
     {
-        //
+        $request->validate([
+            'exam_id' => 'required',
+            'user_id' => 'required',
+            'subject_id' => 'required',
+            'marks' => 'required'
+        ]);
+
+        $newResult = new Result([
+            'exam_id' => $request->get('exam_id'),
+            'user_id' => $request->get('user_id'),
+            'subject_id' => $request->get('subject_id'),
+            'marks' => $request->get('marks')
+        ]);
+
+        $newResult->save();
+        return response()->json($newResult);
     }
 
     /**
@@ -68,9 +84,26 @@ class ResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editResult(Request $request, $id)
     {
-        //
+        $result = Result::findOrFail($id);
+
+        $request->validate([
+            'exam_id' => 'required',
+            'user_id' => 'required',
+            'subject_id' => 'required',
+            'marks' => 'required'
+        ]);
+
+        $result->exam_id = $request->get('exam_id');
+        $result->user_id = $request->get('user_id');
+        $result->subject_id = $request->get('subject_id');
+        $result->marks = $request->get('marks');
+        $result->created_by = Auth::id();
+
+        $result->save();
+
+        return response()->json($result);
     }
 
     /**
@@ -79,8 +112,11 @@ class ResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteResult($id)
     {
-        //
+        $result = Result::findOrFail($id);
+        $result->delete();
+
+        return response()->json($result::all());
     }
 }
