@@ -7,6 +7,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\ResultController;
 /*
 |--------------------------------------------------------------------------
 | API Route.
