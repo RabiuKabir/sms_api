@@ -8,6 +8,7 @@ use App\Http\Controllers\IssueController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ClassroomController;
 /*
 |--------------------------------------------------------------------------
 | API Route.
@@ -57,4 +58,9 @@ Route::group([
     Route::get('/results', [ResultController::class, 'results']);
     Route::patch('/edit-result/{id}', [ResultController::class, 'editResult']);
     Route::delete('/delete-result/{id}', [ResultController::class, 'deleteResult']);
+
+    Route::post('/new-classroom', [ClassroomController::class, 'newClassroom']);
+    Route::get('/classrooms', [ClassroomController::class, 'allClassrooms']);
+    Route::patch('/edit-classroom/{id}', [ClassroomController::class, 'editClassroom']);
+    Route::delete('/delete-classroom/{id}', [ClassroomController::class, 'deleteClassroom']);
 });
