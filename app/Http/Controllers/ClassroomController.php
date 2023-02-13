@@ -41,9 +41,22 @@ class ClassroomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function newClassroom(Request $request)
     {
-        //
+        $request->validate([
+            'section' => 'required',
+            'grade' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        echo  $newClassroom = new Classroom([
+            'section' => $request->get('section'),
+            'grade' => $request->get('grade'),
+            'user_id' => $request->get('user_id'),
+        ]);
+
+        $newClassroom->save();
+          return response()->json($newClassroom);
     }
 
     /**
@@ -75,10 +88,25 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editClassroom(Request $request, $id)
     {
-        //
+        $result = Classroom::findOrFail($id);
+
+        $request->validate([
+            'section' => 'required',
+            'grade' => 'required',
+            'user_id' => 'required',
+        ]);
+
+        $result->section = $request->get('section');
+        $result->grade = $request->get('grade');
+        $result->user_id = $request->get('user_id');
+
+        $result->save();
+
+        return response()->json($result);
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -86,8 +114,11 @@ class ClassroomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteClassroom($id)
     {
-        //
+    $result = Classroom::findOrFail($id);
+    $result->delete();
+
+    return response()->json($result::all());
     }
 }
