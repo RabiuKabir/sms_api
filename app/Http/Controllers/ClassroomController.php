@@ -46,13 +46,13 @@ class ClassroomController extends Controller
         $request->validate([
             'section' => 'required',
             'grade' => 'required',
-            'user_id' => 'required',
+            'user_id' => 'required'
         ]);
 
         echo  $newClassroom = new Classroom([
             'section' => $request->get('section'),
             'grade' => $request->get('grade'),
-            'user_id' => $request->get('user_id'),
+            'user_id' => $request->get('user_id')
         ]);
 
         $newClassroom->save();
@@ -95,7 +95,7 @@ class ClassroomController extends Controller
         $request->validate([
             'section' => 'required',
             'grade' => 'required',
-            'user_id' => 'required',
+            'user_id' => 'required'
         ]);
 
         $result->section = $request->get('section');
