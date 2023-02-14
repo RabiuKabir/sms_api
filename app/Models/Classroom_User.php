@@ -11,7 +11,7 @@ class Classroom_User extends Model
 
     protected $fillable = [
         "classroom_id",
-        "user_id",
+        "user_id"
     ];
 
 
