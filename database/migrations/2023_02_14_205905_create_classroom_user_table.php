@@ -13,8 +13,10 @@ class CreateClassroomUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('classroom__users', function (Blueprint $table) {
+        Schema::create('classroom_user', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('classroom_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateClassroomUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classroom__users');
+        Schema::dropIfExists('classroom_user');
     }
 }
