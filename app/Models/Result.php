@@ -14,7 +14,7 @@ class Result extends Model
         "user_id",
         "subject_id",
         "marks",
-        "created_by",
+        "created_by"
     ];
 
 
