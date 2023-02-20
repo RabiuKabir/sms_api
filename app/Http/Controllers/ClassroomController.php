@@ -49,14 +49,14 @@ class ClassroomController extends Controller
             'user_id' => 'required'
         ]);
 
-        echo  $newClassroom = new Classroom([
+            $newClassroom = new Classroom([
             'section' => $request->get('section'),
             'grade' => $request->get('grade'),
             'user_id' => $request->get('user_id')
         ]);
 
         $newClassroom->save();
-          return response()->json($newClassroom);
+        return response()->json($newClassroom);
     }
 
     /**
