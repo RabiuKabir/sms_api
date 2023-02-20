@@ -13,7 +13,8 @@ class Result extends Model
         "exam_id",
         "user_id",
         "subject_id",
-        "marks"
+        "marks",
+        "created_by"
     ];
 
 

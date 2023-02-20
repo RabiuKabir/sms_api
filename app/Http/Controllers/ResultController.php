@@ -50,16 +50,16 @@ class ResultController extends Controller
             'marks' => 'required'
         ]);
 
-        echo  $newResult = new Result([
+        $newResult = new Result([
             'exam_id' => $request->get('exam_id'),
             'user_id' => $request->get('user_id'),
             'subject_id' => $request->get('subject_id'),
             'marks' => $request->get('marks'),
-            'created_by' => "65"
+            'created_by' => Auth::id()
         ]);
 
-        //   $newResult->save();
-        //   return response()->json($newResult);
+        $newResult->save();
+        return response()->json($newResult);
     }
 
     /**
