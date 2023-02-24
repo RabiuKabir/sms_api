@@ -23,10 +23,10 @@ use App\Http\Middleware\EnsureUserHasRole;
 */
 // 'throttle:60,1' to add rate limiter which is very important...
 
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
-], function ($router) {
+
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
