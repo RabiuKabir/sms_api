@@ -13,6 +13,5 @@ class Classroom_User extends Model
         "classroom_id",
         "user_id",
     ];
-
-
+    
 }
