@@ -9,6 +9,8 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ClassroomController;
+
+use App\Http\Middleware\EnsureUserHasRole;
 /*
 |--------------------------------------------------------------------------
 | API Route.
@@ -44,7 +46,7 @@ Route::group([
     Route::put('/edit-issue/{id}', [IssueController::class, 'editIssue']);
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 
-    Route::post('/new-subject', [SubjectController::class, 'newSubject']);
+    Route::post('/new-subject', [SubjectController::class, 'newSubject'])->middleware('role: 1');
     Route::get('/subjects', [SubjectController::class, 'subjects']);
     Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
     Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
