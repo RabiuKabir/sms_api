@@ -10,7 +10,6 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ClassroomController;
 
-use App\Http\Middleware\EnsureUserHasRole;
 /*
 |--------------------------------------------------------------------------
 | API Route.
@@ -24,11 +23,11 @@ use App\Http\Middleware\EnsureUserHasRole;
 // 'throttle:60,1' to add rate limiter which is very important...
 
 
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
@@ -46,10 +45,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::put('/edit-issue/{id}', [IssueController::class, 'editIssue']);
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 
-    Route::post('/new-subject', [SubjectController::class, 'newSubject'])->middleware('role: 1');
-    Route::get('/subjects', [SubjectController::class, 'subjects']);
-    Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
-    Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
+    Route::middleware(['role: admin'])->group(function () {
+        Route::post('/new-subject', [SubjectController::class, 'newSubject']);
+        Route::get('/subjects', [SubjectController::class, 'subjects']);
+        Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
+        Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
+    });
+
 
     Route::post('/new-exam', [ExamController::class, 'newExam']);
     Route::get('/exams', [ExamController::class, 'exams']);
