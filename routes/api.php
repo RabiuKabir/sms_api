@@ -45,7 +45,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::put('/edit-issue/{id}', [IssueController::class, 'editIssue']);
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 
-    Route::middleware(['role: admin'])->group(function () {
+    Route::middleware(['role: user'])->group(function () {
         Route::post('/new-subject', [SubjectController::class, 'newSubject']);
         Route::get('/subjects', [SubjectController::class, 'subjects']);
         Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
