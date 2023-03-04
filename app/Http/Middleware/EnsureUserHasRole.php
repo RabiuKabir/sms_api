@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 //     }
 // }
 
+// THIS IS NOT WORKING
 
 class EnsureUserHasRole
 {
