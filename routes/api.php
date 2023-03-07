@@ -26,8 +26,8 @@ use App\Http\Controllers\ClassroomController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-
-Route::group(['middleware' => 'allowAdmin', 'prefix' => 'admin'], function () {
+// Declared middlewares are allowAmin, allowStudent, and allowTeacher
+Route::group(['middleware' => 'allowAdmin', 'prefix' => 'admin'], function () {     
     Route::post('/new-subject', [SubjectController::class, 'newSubject']);
     Route::get('/subjects', [SubjectController::class, 'subjects']);
     Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
