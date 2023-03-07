@@ -26,6 +26,14 @@ use App\Http\Controllers\ClassroomController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
+
+Route::group(['middleware' => 'allowAdmin', 'prefix' => 'admin'], function () {
+    Route::post('/new-subject', [SubjectController::class, 'newSubject']);
+    Route::get('/subjects', [SubjectController::class, 'subjects']);
+    Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
+    Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
+});
+
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -45,12 +53,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::put('/edit-issue/{id}', [IssueController::class, 'editIssue']);
     Route::delete('/delete-issue/{id}', [IssueController::class, 'deleteIssue']);
 
-    Route::middleware('allowAdmin')->group(function () {
-        Route::post('/new-subject', [SubjectController::class, 'newSubject']);
-        Route::get('/subjects', [SubjectController::class, 'subjects']);
-        Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
-        Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
-    });
+    // Route::middleware('allowAdmin')->group(function () {
+    //     Route::post('/new-subject', [SubjectController::class, 'newSubject']);
+    //     Route::get('/subjects', [SubjectController::class, 'subjects']);
+    //     Route::put('/edit-subject/{id}', [SubjectController::class, 'editSubject']);
+    //     Route::delete('/delete-subject/{id}', [SubjectController::class, 'deleteSubject']);
+    // });
+
 
 
     Route::post('/new-exam', [ExamController::class, 'newExam']);
