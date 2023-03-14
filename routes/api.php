@@ -20,7 +20,7 @@ use App\Http\Controllers\ClassroomController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// 'throttle:60,1' to add rate limiter which is very important...
+// 'throttle:60,1' to add rate limiter which is very important..
 
 
 Route::post('/login', [AuthController::class, 'login']);
